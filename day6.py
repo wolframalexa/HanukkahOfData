@@ -30,4 +30,4 @@ cheaporders = pd.merge(cheapest, orders, on = "orderid", how="inner")
 cheapskates = pd.merge(nycustomers, cheaporders, on = "customerid", how = "inner")
 print(cheapskates['phone'].mode())
 
-# see if this woman shows up multiple times
+# see if this woman shows up multiple times - she does!
