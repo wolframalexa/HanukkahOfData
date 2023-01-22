@@ -8,14 +8,26 @@ customers['first'] = names[0]
 customers['last'] = names[1].str.lower()
 
 kochs = customers[customers['last'] == 'koch']
-print(kochs) # no luck!
+# print(kochs) # no luck!
 
 # "subway fare" = lives within nyc
 state = customers['citystatezip'].str.split(', ',expand=True)
 state = state[1].str.split(' ', expand = True)
-print(state)
 
 customers['state'] = state[0]
-print(customers)
 nycustomers = customers[customers['state'] == "NY"]
-print(nycustomers)
+
+# find cheapest each item has ever been at noah's
+orders_items = pd.read_csv("noahs-orders_items.csv")
+cheapest = orders_items.loc[orders_items.groupby("sku").unit_price.idxmin()]
+print(cheapest)
+
+# find orders with cheapest items
+orders = pd.read_csv('noahs-orders.csv')
+cheaporders = pd.merge(cheapest, orders, on = "orderid", how="inner")
+
+# find who's buying the cheapest items
+cheapskates = pd.merge(nycustomers, cheaporders, on = "customerid", how = "inner")
+print(cheapskates['phone'].mode())
+
+# see if this woman shows up multiple times
