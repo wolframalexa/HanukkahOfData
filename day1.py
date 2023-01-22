@@ -1,5 +1,4 @@
 import pandas as pd
-import re
 
 customers = pd.read_csv("noahs-customers.csv")
 names = customers['name'].str.split(' ',expand=True)
