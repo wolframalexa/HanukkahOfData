@@ -21,4 +21,4 @@ coffee2017 = pd.merge(items, orders, on = "orderid", how = "inner")
 
 # j.d. who ordered coffee in 2017
 new = pd.merge(customers, coffee2017, on = "customerid", how = "inner")
-print(new.head())
+print(new['phone'])
